@@ -1,0 +1,39 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "react-app",
+    "airbnb-base",
+    "prettier",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "import", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "packageDir": "./"
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error", { "ignoreTypeValueShadow": true }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}
