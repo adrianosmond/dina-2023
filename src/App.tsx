@@ -15,7 +15,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(0);
   let initialUnguessed: Guess[][];
   try {
-    const stored = false; // sessionStorage.getItem('unguessed');
+    const stored = sessionStorage.getItem('unguessed');
     initialUnguessed = stored
       ? JSON.parse(stored)
       : pages.map((p) => p.toGuess);
@@ -34,6 +34,8 @@ const App = () => {
   const canGoForward =
     currentPage < pages.length - 1 &&
     (toGuess.length === 0 || pages[currentPage].canContinueWithUnguessed);
+  const pixelation =
+    2 + toGuess.length * (10 / pages[currentPage].toGuess.length);
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (e) =>
     setGuess(e.target.value);
@@ -75,14 +77,28 @@ const App = () => {
       className="relative flex flex-col gap-6 items-center min-h-screen p-6"
       data-page-id={currentPage}
     >
-      <div
-        className="bg-red-400 illustration"
+      <svg
         style={
           currentPage === 0
-            ? { width: '75vh', height: '55vh' }
+            ? { width: '55vh', height: '55vh' }
             : { width: '45vh', height: '45vh' }
         }
-      ></div>
+      >
+        <filter id="pixelate" x="0" y="0">
+          <feFlood x="4" y="4" height="2" width="2" />
+          <feComposite width={pixelation * 2} height={pixelation * 2} />
+          <feTile result="a" />
+          <feComposite in="SourceGraphic" in2="a" operator="in" />
+          <feMorphology operator="dilate" radius={pixelation} />
+        </filter>
+        <image
+          width="100%"
+          height="100%"
+          preserveAspectRatio="xMidYMid slice"
+          {...(toGuess.length > 0 ? { filter: 'url(#pixelate)' } : {})}
+          xlinkHref={`/images/page${currentPage}.avif`}
+        />
+      </svg>
       <div className="words">
         {lines.map((line, lineIdx) => (
           <p key={`${currentPage}-${lineIdx}`}>{line}</p>
@@ -107,7 +123,7 @@ const App = () => {
           className="border border-gray-500 px-2 py-1"
         />
         <button
-          // disabled={!canGoForward}
+          disabled={!canGoForward}
           onClick={() => setCurrentPage((s) => s + 1)}
           className={['w-20 p-2', !canGoForward ? '' : 'cursor-pointer'].join(
             ' ',
