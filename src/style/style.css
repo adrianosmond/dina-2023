@@ -13,8 +13,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-[data-page-id="0"] .words {
+[data-page-id="0"] .words,
+[data-page-id="12"] .words {
   font-size: 100px;
+}
+
+.image {
+  width: 45vh;
+  height: 45vh;
+}
+
+[data-page-id="0"] .image {
+  width: 55vh;
+  height: 55vh;
+}
+
+[data-page-id="12"] {
+  padding-top: 25vh;
 }
 
 .pixelate {
