@@ -14,7 +14,7 @@ body {
 }
 
 [data-page-id="0"] .words,
-[data-page-id="12"] .words {
+[data-page-id="14"] .words {
   font-size: 100px;
 }
 
@@ -28,7 +28,14 @@ body {
   height: 55vh;
 }
 
-[data-page-id="12"] {
+[data-page-id="5"] .image,
+[data-page-id="9"] .image {
+  width: 50vh;
+  height: 75vh;
+  object-fit: contain;
+}
+
+[data-page-id="14"] .words {
   padding-top: 25vh;
 }
 

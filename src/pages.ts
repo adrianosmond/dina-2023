@@ -101,6 +101,12 @@ const pages: Page[] = [
   },
   {
     toGuess: [],
+    canContinueWithUnguessed: true,
+    hasImage: true,
+    lines: [],
+  },
+  {
+    toGuess: [],
     canContinueWithUnguessed: false,
     hasImage: true,
     lines: [
@@ -129,6 +135,12 @@ const pages: Page[] = [
       '"What a good idea!" She said, then took the book and went.',
       'A slight ^skip in her step thanks to the handsome mystery gent',
     ],
+  },
+  {
+    toGuess: [],
+    canContinueWithUnguessed: true,
+    hasImage: true,
+    lines: [],
   },
   {
     toGuess: [],
